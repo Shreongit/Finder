@@ -1,0 +1,17 @@
+<Project Sdk="WixToolset.Sdk/7.0.0">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <ProductVersion Condition="'$(ProductVersion)' == ''">1.0.0</ProductVersion>
+    <InstallerPlatform>x64</InstallerPlatform>
+    <OutputPath>$(MSBuildThisFileDirectory)..\artifacts\installer\</OutputPath>
+    <OutputName>FinderSetup</OutputName>
+    <PayloadAuthoring Condition="'$(PayloadAuthoring)' == ''">$(MSBuildThisFileDirectory)..\artifacts\installer\Payload.wxs</PayloadAuthoring>
+    <FinderIconPath Condition="'$(FinderIconPath)' == ''">$(MSBuildThisFileDirectory)..\src\Finder.App\Assets\Icons\Finder.ico</FinderIconPath>
+    <DefineConstants>$(DefineConstants);ProductVersion=$(ProductVersion);FinderIconPath=$(FinderIconPath)</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="7.0.0" />
+    <Compile Include="$(PayloadAuthoring)" />
+  </ItemGroup>
+</Project>
