@@ -1,7 +1,4 @@
-<h1 align="center> FINDER
-
-</h1>
-
+<h1 align="center">Finder</h1>
 <p align="center">
   <strong>A faster way to find anything on Windows.</strong>
 </p>
