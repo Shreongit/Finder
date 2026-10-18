@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/readme/finder-icon.png" alt="Finder app icon" width="128" />
-</p>
-
 <h1 align="center">Finder</h1>
 
 <p align="center">A quick way to find and open apps, files, folders, Windows settings, and web searches.</p>
