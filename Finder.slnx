@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Finder.App/Finder.App.csproj" />
+    <Project Path="src/Finder.Core/Finder.Core.csproj" />
+    <Project Path="src/Finder.Platform.Windows/Finder.Platform.Windows.csproj" />
+    <Project Path="src/Finder.Search.Apps/Finder.Search.Apps.csproj" />
+    <Project Path="src/Finder.Search.Files/Finder.Search.Files.csproj" />
+    <Project Path="src/Finder.Search.Settings/Finder.Search.Settings.csproj" />
+    <Project Path="src/Finder.Search.Web/Finder.Search.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Finder.Tests/Finder.Tests.csproj" />
+  </Folder>
+</Solution>

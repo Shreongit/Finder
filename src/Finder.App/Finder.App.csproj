@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Finder.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Finder.Core\Finder.Core.csproj" />
+    <ProjectReference Include="..\Finder.Platform.Windows\Finder.Platform.Windows.csproj" />
+    <ProjectReference Include="..\Finder.Search.Apps\Finder.Search.Apps.csproj" />
+    <ProjectReference Include="..\Finder.Search.Files\Finder.Search.Files.csproj" />
+    <ProjectReference Include="..\Finder.Search.Settings\Finder.Search.Settings.csproj" />
+    <ProjectReference Include="..\Finder.Search.Web\Finder.Search.Web.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ApplicationIcon>Assets\Icons\Finder.ico</ApplicationIcon>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,67 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Light Windows search palette. The layered WPF window provides transparency; no Mica claim. -->
+    <SolidColorBrush x:Key="FinderBackgroundBrush" Color="#F2F4F7FA" />
+    <SolidColorBrush x:Key="FinderSurfaceBrush" Color="#FFF4F7FA" />
+    <SolidColorBrush x:Key="FinderTextBrush" Color="#FF202124" />
+    <SolidColorBrush x:Key="FinderMutedTextBrush" Color="#FF666B73" />
+    <SolidColorBrush x:Key="FinderPlaceholderBrush" Color="#FF858B93" />
+    <SolidColorBrush x:Key="FinderAccentBrush" Color="#FF4267B2" />
+    <SolidColorBrush x:Key="FinderTextSelectionBrush" Color="#664267B2" />
+    <SolidColorBrush x:Key="FinderBorderBrush" Color="#407B8490" />
+    <SolidColorBrush x:Key="FinderSelectionBrush" Color="#FFE5EAF1" />
+    <SolidColorBrush x:Key="FinderHoverBrush" Color="#FFECEFF3" />
+    <Color x:Key="FinderShadowColor">#27313F</Color>
+
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Segoe UI Variable, Segoe UI" />
+        <Setter Property="Foreground" Value="{DynamicResource FinderTextBrush}" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    </Style>
+
+    <Style x:Key="FinderSearchTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource FinderTextBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontFamily" Value="Segoe UI Variable, Segoe UI" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="CaretBrush" Value="{DynamicResource FinderAccentBrush}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource FinderTextSelectionBrush}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="FinderResultItem" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="1,1" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="ItemBorder" Background="{TemplateBinding Background}" CornerRadius="8" Padding="8,3">
+                        <ContentPresenter VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource FinderHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource FinderSelectionBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.55" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+
+
