@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/finder-icon.png" alt="Finder app icon" width="540" />
+  <img src="assets/readme/finder-icon.png" alt="Finder app icon" width="128" />
 </p>
 
 <h1 align="center">Finder</h1>
