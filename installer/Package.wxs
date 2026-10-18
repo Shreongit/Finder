@@ -8,7 +8,8 @@
            Compressed="yes">
     <MajorUpgrade DowngradeErrorMessage="A newer version of Finder is already installed." />
     <MediaTemplate EmbedCab="yes" />
-    <ui:WixUI Id="WixUI_Minimal" />
+    <ui:WixUI Id="WixUI_FeatureTree" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.LicenseRtfPath)" />
 
     <Icon Id="FinderIcon" SourceFile="$(var.FinderIconPath)" />
     <Property Id="ARPPRODUCTICON" Value="FinderIcon" />

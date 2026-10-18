@@ -6,8 +6,9 @@
     <OutputPath>$(MSBuildThisFileDirectory)..\artifacts\installer\</OutputPath>
     <OutputName>FinderSetup</OutputName>
     <PayloadAuthoring Condition="'$(PayloadAuthoring)' == ''">$(MSBuildThisFileDirectory)..\artifacts\installer\Payload.wxs</PayloadAuthoring>
+    <LicenseRtfPath Condition="'$(LicenseRtfPath)' == ''">$(MSBuildThisFileDirectory)license.rtf</LicenseRtfPath>
     <FinderIconPath Condition="'$(FinderIconPath)' == ''">$(MSBuildThisFileDirectory)..\src\Finder.App\Assets\Icons\Finder.ico</FinderIconPath>
-    <DefineConstants>$(DefineConstants);ProductVersion=$(ProductVersion);FinderIconPath=$(FinderIconPath)</DefineConstants>
+    <DefineConstants>$(DefineConstants);ProductVersion=$(ProductVersion);FinderIconPath=$(FinderIconPath);LicenseRtfPath=$(LicenseRtfPath)</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,60 +1,61 @@
-# Finder
+<p align="center">
+  <img src="assets/readme/finder-icon.png" alt="Finder app icon" width="112" />
+</p>
 
-Finder is a lightweight Windows launcher for finding and opening Start Menu applications, files, folders, websites, and Windows Settings.
+<h1 align="center">Finder</h1>
 
-## Features
+<p align="center">A quick way to find and open apps, files, folders, Windows settings, and web searches.</p>
 
-- Reusable, compact WPF search window with keyboard navigation.
-- Searches user and common Start Menu shortcuts, common user folders, Windows Settings, and web URLs/searches.
-- Search providers run independently; stale UI queries are canceled and the filesystem scan is bounded.
-- The installer can add a per-user sign-in startup shortcut; Finder starts hidden in the notification area.
-- The flyout dismisses when it loses activation and when a result launches successfully. It clears and cancels searches when hidden.
-- Finder follows the current user's Windows app light/dark preference and updates when Windows changes it.
-- File search covers the current user's profile and standard Desktop, Documents, Downloads, Pictures, Music, and Videos folders. It searches nested folders breadth-first, skips reparse points, and caps each query at 2,000 directories / 150,000 entries and 50 file/folder matches. This is a responsive best-effort user-profile search, not full-disk indexing.
+---
 
-## Technology
+Finder is a small Windows search launcher that stays ready in the notification area. Bring it up with a keyboard shortcut, type what you are looking for, and open a result with the keyboard or mouse.
 
-C# 14, .NET 10, WPF, and Windows APIs. The project uses a modular solution with separate core, Windows platform, and search provider projects.
+## Screenshots
 
-## Prerequisites
+Search for an installed app or a file by name:
 
-- Windows 10 or later.
-- .NET 10 SDK to build; .NET 10 Desktop Runtime to run framework-dependent builds.
-- WiX Toolset SDK 7.0.0 is restored automatically when building the MSI.
+<p align="center">
+  <img src="assets/readme/finder-app-search.png" alt="Finder showing application and file results for a Chrome search" width="900" />
+</p>
 
-## Build and run
+Search across folders, files, and the web:
 
-```powershell
-dotnet restore .\Finder.slnx
-dotnet build .\Finder.slnx --no-restore
-dotnet run --project .\src\Finder.App\Finder.App.csproj
-```
+<p align="center">
+  <img src="assets/readme/finder-file-and-web-search.png" alt="Finder showing folder, file, and Google web search results" width="900" />
+</p>
 
-## Build and install the Windows MSI
+## Install Finder
 
-From the repository root, run:
+1. Download **FinderSetup.msi** from the release and open it.
+2. Read and accept the Finder license agreement to continue.
+3. Follow the installer prompts. Finder installs for your Windows user and does not require administrator access.
 
-```powershell
-.\scripts\build-installer.ps1 -AcceptWixEula
-```
+Finder is installed in `%LOCALAPPDATA%\Programs\Finder`. The installer creates a Start Menu shortcut and, by default, starts Finder automatically when you sign in. To turn off automatic startup, disable Finder in Windows **Settings → Apps → Startup** after installation. Advanced: you can install without enabling automatic startup by running `msiexec /i FinderSetup.msi AUTOSTART=0` from the folder containing the installer.
 
-Review the [WiX Open Source Maintenance Fee terms](https://wixtoolset.org/osmf/) before passing `-AcceptWixEula`; WiX 7 requires an explicit acceptance gesture. The script restores and builds the solution in Release mode, runs the tests, publishes a self-contained `win-x64` application, and creates `artifacts\installer\FinderSetup.msi`. Set the MSI version with `-ProductVersion`, for example `-ProductVersion 1.2.0`. The installer is per-user and installs to `%LOCALAPPDATA%\Programs\Finder` without administrator rights. It creates a Start Menu shortcut and, by default, a sign-in Startup shortcut. To install without automatic startup, run `msiexec /i .\artifacts\installer\FinderSetup.msi AUTOSTART=0`. Finder starts hidden with its tray icon available. Uninstall using Windows Settings → Apps → Installed apps → Finder, or `msiexec /x .\artifacts\installer\FinderSetup.msi`.
+To remove Finder, open **Settings → Apps → Installed apps**, select Finder, and choose **Uninstall**.
 
-## Shortcut
+## Use Finder
 
-Finder attempts to register **Alt + Space** with Windows `RegisterHotKey`, then uses its configured fallback if Windows rejects that registration. The active shortcut appears in the tray menu. Use Escape to hide the launcher.
+- Press **Alt + Space** to open Finder. If another program already uses that shortcut, Finder tries **Ctrl + Alt + Space** instead. The active shortcut is shown in Finder’s notification-area menu.
+- You can also open Finder from its notification-area icon. Right-click the icon and choose **Open Finder**.
+- Type a few letters from an app, file, folder, or setting name. Matching results appear as you type.
+- Use **Up** and **Down** to move through results, then press **Enter** to open the selected result. You can also click or double-click a result.
+- Press **Esc** to hide Finder. Finder also hides after you open a result or click away from its window.
 
-## Tests
+## What Finder can search
 
-```powershell
-dotnet test .\Finder.slnx
-```
+- **Apps:** Windows Start Menu shortcuts for your account and for all users.
+- **Files and folders:** Your user profile and common folders such as Desktop, Documents, Downloads, Pictures, Music, and Videos. File search is a live, best-effort search rather than a full-disk index; each search is bounded to keep it responsive, so results beyond the scan limits may not appear.
+- **Windows Settings:** Search for settings such as display, sound, network, Bluetooth, updates, storage, and startup apps.
+- **Web:** Search the web or open a web address. When you choose a web search result, the query is sent to Google in your browser.
 
-## Known limitations
+Finder follows your Windows app light or dark theme preference.
 
-- File search performs a bounded, best-effort traversal rather than maintaining an index; very large profiles may not return every match.
-- Start Menu shortcuts are indexed once for the process lifetime; newly installed apps require restarting Finder to appear.
-- Windows-specific foreground activation, shortcut ownership, shell launching, and settings links require manual verification on the target Windows desktop.
-- File searches are bounded; matches beyond the scan limits may not appear. Exact and prefix name matches rank above partial matches.
-- The translucent WPF surface follows the Windows app theme preference, but does not enable Mica or Acrylic composition effects.
-- Windows-specific foreground activation, shell launching, and settings links require manual verification on the target Windows desktop.
+## System requirements
+
+- 64-bit Windows 10 or later.
+- The release installer includes the files needed to run Finder; a separate .NET installation is not required.
+
+## License
+
+Finder is provided under the license agreement shown during installation. The installed application and its third-party components may also be subject to their respective license terms.

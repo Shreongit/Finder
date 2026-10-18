@@ -10,6 +10,7 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $solution = Join-Path $repoRoot 'Finder.slnx'
 $appProject = Join-Path $repoRoot 'src\Finder.App\Finder.App.csproj'
 $installerProject = Join-Path $repoRoot 'installer\Finder.Installer.wixproj'
+$licensePath = Join-Path $repoRoot 'installer\license.rtf'
 $iconPath = Join-Path $repoRoot 'src\Finder.App\Assets\Icons\Finder.ico'
 $publishDir = Join-Path $repoRoot 'artifacts\publish\win-x64'
 $installerDir = Join-Path $repoRoot 'artifacts\installer'
@@ -165,7 +166,7 @@ function Write-PayloadAuthoring([string] $SourceRoot, [string] $Destination) {
     Write-Host "Authored $($files.Count) MSI payload components."
 }
 
-foreach ($required in @($solution, $appProject, $installerProject, $iconPath)) {
+foreach ($required in @($solution, $appProject, $installerProject, $iconPath, $licensePath)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) { throw "Required installer input is missing: $required" }
 }
 if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) { throw 'The .NET SDK is required but dotnet was not found on PATH.' }
@@ -200,7 +201,7 @@ Invoke-DotNet @('publish', $appProject, '-c', 'Release', '-r', 'win-x64', '--sel
 Write-PayloadAuthoring $publishDir $payloadAuthoring
 
 Write-Host 'Building MSI...'
-Invoke-DotNet @('build', $installerProject, '-c', 'Release', "-p:ProductVersion=$ProductVersion", '-p:AcceptEula=wix7', "-p:PayloadAuthoring=$payloadAuthoring", "-p:FinderIconPath=$iconPath", "-p:OutputPath=$installerDir", '-p:OutputName=FinderSetup', '-p:InstallerPlatform=x64')
+Invoke-DotNet @('build', $installerProject, '-c', 'Release', "-p:ProductVersion=$ProductVersion", '-p:AcceptEula=wix7', "-p:PayloadAuthoring=$payloadAuthoring", "-p:FinderIconPath=$iconPath", "-p:LicenseRtfPath=$licensePath", "-p:OutputPath=$installerDir", '-p:OutputName=FinderSetup', '-p:InstallerPlatform=x64')
 if (-not (Test-Path -LiteralPath $msiPath -PathType Leaf)) { throw "WiX build succeeded but expected MSI was not found at $msiPath" }
 $msi = Get-Item -LiteralPath $msiPath
 if ($msi.Length -le 0) { throw "MSI output is empty: $msiPath" }
